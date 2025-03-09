@@ -176,7 +176,7 @@ export default function CardMatchingGame({
         </div>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full">
         {cards.map((card) => (
           <Card
             key={card.id}

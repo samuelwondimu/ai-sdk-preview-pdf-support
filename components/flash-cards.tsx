@@ -54,7 +54,7 @@ const FlashCard = ({
       </div>
 
       <div
-        className="relative w-full h-[300px] perspective-1000 mb-8 cursor-pointer"
+        className="relative w-full h-[400px] perspective-1000 mb-8 cursor-pointer overflow-hidden"
         onClick={() => setIsFlipped(!isFlipped)}
       >
         <div
@@ -65,7 +65,6 @@ const FlashCard = ({
           <Card className="absolute w-full h-full backface-hidden">
             <CardContent className="flex items-center justify-center h-full p-6 text-center">
               <div>
-                <p className="text-sm text-muted-foreground mb-2">FRONT</p>
                 <p className="text-xl font-medium">{currentCard.question}</p>
               </div>
             </CardContent>
@@ -74,7 +73,6 @@ const FlashCard = ({
           <Card className="absolute w-full h-full backface-hidden rotate-y-180">
             <CardContent className="flex items-center justify-center h-full p-6 text-center">
               <div>
-                <p className="text-sm text-muted-foreground mb-2">BACK</p>
                 <p className="text-xl">{currentCard.description}</p>
               </div>
             </CardContent>
@@ -82,7 +80,7 @@ const FlashCard = ({
         </div>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4 flex-wrap">
         <Button
           onClick={goToPrevCard}
           disabled={currentCardIndex === 0}
@@ -102,6 +100,7 @@ const FlashCard = ({
           onClick={clearPDF}
           disabled={currentCardIndex !== cards.length - 1}
           variant="outline"
+          className="w-full md:w-fit"
         >
           <FileText className="mr-2 h-4 w-4" /> Try Another PDF
         </Button>

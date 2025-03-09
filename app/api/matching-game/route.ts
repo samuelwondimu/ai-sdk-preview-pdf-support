@@ -1,4 +1,7 @@
-import { questionSchema, questionsSchema } from "@/lib/schemas";
+import {
+  matchingArraySchema,
+  matchingGameSetSchema,
+} from "@/lib/schemas";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { streamObject } from "ai";
 
@@ -14,19 +17,18 @@ export async function POST(req: Request) {
 
   const result = streamObject({
     model: google("gemini-1.5-pro-latest"),
-    
     messages: [
       {
         role: "system",
         content:
-          "You are a teacher. Your job is to take a document, and create a multiple choice test (with 4 questions) based on the content of the document. Each option should be roughly equal in length.",
+          "You are a teacher. Your job is to take a document and create matching pairs (terms and definitions) for a memory match game. Generate exactly 8 pairs, where each term has a corresponding definition. Ensure the terms and definitions are clear, concise, and directly related to the content of the document.",
       },
       {
         role: "user",
         content: [
           {
             type: "text",
-            text: "Create a multiple choice test based on this document.",
+            text: "Create matching pairs for a memory match game based on this document.",
           },
           {
             type: "file",
@@ -36,15 +38,14 @@ export async function POST(req: Request) {
         ],
       },
     ],
-    schema: questionSchema,
+    schema: matchingGameSetSchema,
     output: "array",
     onFinish: ({ object }) => {
-      const res = questionsSchema.safeParse(object);
+      const res = matchingArraySchema.safeParse(object);
       if (res.error) {
         throw new Error(res.error.errors.map((e) => e.message).join("\n"));
       }
     },
   });
-
   return result.toTextStreamResponse();
 }

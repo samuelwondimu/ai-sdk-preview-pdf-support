@@ -29,6 +29,8 @@ const QuestionCard: React.FC<{
 }> = ({ question, selectedAnswer, onSelectAnswer, showCorrectAnswer }) => {
   const answerLabels = ["A", "B", "C", "D"];
 
+  if (!question) return <div>loading...</div>;
+
   return (
     <div className="space-y-6">
       <h2 className="text-lg font-semibold leading-tight">

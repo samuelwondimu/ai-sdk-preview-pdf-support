@@ -22,11 +22,11 @@ interface CardMatchingGameProps {
   clearPDF: () => void;
 }
 
-export default function CardMatchingGame({
+const CardMatchingGame: React.FC<CardMatchingGameProps> = ({
   title,
   matchingGameSet,
   clearPDF,
-}: CardMatchingGameProps) {
+}) => {
   const [flippedCards, setFlippedCards] = useState<string[]>([]);
   const [matchedPairs, setMatchedPairs] = useState<number>(0);
   const [moves, setMoves] = useState<number>(0);
@@ -148,7 +148,8 @@ export default function CardMatchingGame({
   return (
     <div className="flex flex-col items-center max-w-6xl mx-auto p-4">
       <div className="w-full text-center mb-6">
-        <h1 className="text-3xl font-bold mb-2">{title}</h1>
+        <h1 className="text-3xl font-bold mb-2">{matchingGameSet.title}</h1>
+        <p className="">{matchingGameSet.description}</p>
         <div className="flex justify-center gap-6 mb-4">
           <div className="text-lg">
             <span className="font-medium">Moves:</span> {moves}
@@ -197,4 +198,6 @@ export default function CardMatchingGame({
       </div>
     </div>
   );
-}
+};
+
+export default CardMatchingGame;

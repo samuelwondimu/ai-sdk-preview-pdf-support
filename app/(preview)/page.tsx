@@ -11,7 +11,7 @@ import Quiz from "@/components/quiz";
 import QuizGenerator from "@/components/quiz-generator";
 import { LearningMode, LearningModeEnum } from "@/lib/constants";
 import FlashCard from "@/components/flash-cards";
-import CardMatchingGame from "@/components/ui/matching-question";
+import CardMatchingGame from "@/components/matching-question";
 
 export default function ChatWithFiles() {
   const [questions, setQuestions] = useState<z.infer<typeof questionsSchema>>(

@@ -157,9 +157,11 @@ const QuizGenerator: React.FC<QuizGeneratorProps> = ({
     setTitle(mode);
   };
 
-  const isLoading = Object.values({ generateQuiz, generateFlashCards }).some(
-    (fn) => fn.isLoading
-  );
+  const isLoading = Object.values({
+    generateQuiz,
+    generateFlashCards,
+    generateMatchingGameSets,
+  }).some((fn) => fn.isLoading);
 
   const activeGeneration = Object.values({
     generateQuiz,
@@ -277,7 +279,7 @@ const QuizGenerator: React.FC<QuizGeneratorProps> = ({
               className="w-full py-6 text-lg"
               disabled={files.length === 0}
             >
-              {generateQuiz.isLoading ? (
+              {isLoading ? (
                 <div className="flex items-center gap-2">
                   <Loader2 className="h-5 w-5 animate-spin" />
                   Generating {mode}...
